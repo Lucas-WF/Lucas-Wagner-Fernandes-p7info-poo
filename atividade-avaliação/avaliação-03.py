@@ -5,7 +5,7 @@ def somanprimos(n):
     lista = []
     while a:
         contador = 0
-        if len(lista) == n:
+        if len(lista) == n:  # Se o tamanho da lista se igualar ao valor digitado pelo usuário, o loop é terminado
             a = False
         for x in range(1, i+1):
             if i % x == 0:
@@ -13,8 +13,13 @@ def somanprimos(n):
         if contador == 2:
             lista.append(i)
         i = i + 1
-    return sum(lista)
+    return sum(lista)  # Retornando a soma dos elementos da lista
 
 
-number = int(input("Digite um número inteiro e não negativo: "))
+try:
+    number = int(input("Digite um número inteiro e não negativo: "))
+except:
+    print("\n Valor incorreto. Saindo...")
+    exit()
+
 print(f"O resultado da soma dos {number} primeiros números primos: {somanprimos(number)}")

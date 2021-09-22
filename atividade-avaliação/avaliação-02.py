@@ -46,7 +46,7 @@ def longest_word_phrase(words_list):  # Retorna a maior palavra entre todas as f
                 if len(i) >= k:
                     k = len(i)
                     longest_word_ph = i
-        return longest_word_ph
+    return longest_word_ph
 
 
 def main():  # Função principal do código

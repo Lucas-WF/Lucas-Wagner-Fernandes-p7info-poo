@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Código refatorado da atividade-avaliação nº3
+"""
+
+
 def somanprimos(n):
     a = True
     i = 1
@@ -16,10 +21,15 @@ def somanprimos(n):
     return sum(lista)  # Retornando a soma dos elementos da lista
 
 
-try:
-    number = int(input("Digite um número inteiro e não negativo: "))
-except:
-    print("\n Valor incorreto. Saindo...")
-    exit()
+def main():
+    try:
+        number = int(input("Digite um número inteiro e não negativo: "))
+    except:
+        print("\nValor incorreto. Saindo...")
+        exit()
 
-print(f"O resultado da soma dos {number} primeiros números primos: {somanprimos(number)}")
+    print(f"O resultado da soma dos {number} primeiros números primos: {somanprimos(number)}")
+
+
+if __name__ == "__main__":
+    main()

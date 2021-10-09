@@ -1,8 +1,1 @@
-Projeto Sistema de Vendas
-Classes:
-    NotaFiscal
-    Cliente
-    ItemNotaFiscal
-    Produto
-
-    
+Código refatorado da atividade avaliação da "Nota Fiscal". Apenas ajustei algumas variáveis no código(respeitando o conjunto de boas práticas da PEP8, como o nome de classes em CamelCase), defini getters e setters para a facilitação da impressão da nota, e por fim, utilizei a capacidade de formatação do Python para imprimir o código como solicitado no PDF.

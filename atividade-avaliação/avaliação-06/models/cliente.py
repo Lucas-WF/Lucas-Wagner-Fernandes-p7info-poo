@@ -9,8 +9,6 @@ class Cliente(db.Model):
     cnpjcpf = db.Column(db.String(14), unique=True, nullable=False)
     codigo = db.Column(db.String(120), nullable=False)
     tipo = db.Column(db.Integer, nullable=False)
-    nota_fiscal_id = db.Column(db.Integer, db.ForeignKey("NotaFiscal.id"), nullable=False)
-    nota_fiscal = db.relationship("NotaFiscal", foreign_keys=nota_fiscal_id, backref="Cliente")
 
     def __init__(self, id, nome, codigo, cnpjcpf, tipo):
         super().__init__(id=id, nome=nome, codigo=codigo, cnpjcpf=cnpjcpf, tipo=tipo)
@@ -21,4 +19,5 @@ class Cliente(db.Model):
 
 
 if __name__ == "__main__":
-    print("Oi")
+    cli = Cliente(1, "Jose Maria", 100, "200.100.345-34", 1)
+    print(cli)

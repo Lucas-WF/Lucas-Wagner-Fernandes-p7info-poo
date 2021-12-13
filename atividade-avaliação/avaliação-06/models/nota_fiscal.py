@@ -1,5 +1,4 @@
 from models import db
-import datetime
 from models.cliente import Cliente
 from models.item_nota_fiscal import ItemNotaFiscal
 
@@ -11,7 +10,7 @@ class NotaFiscal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     codigo = db.Column(db.Integer, nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey("Cliente.id"), nullable=False)
-    data = db.Column(db.DateTime, default=datetime.datetime.now())
+    data = db.Column(db.String(255), default="2018-11-11")
     itens = db.relationship("ItemNotaFiscal", backref="NotaFiscal", lazy=True)
     cliente = db.relationship("Cliente", foreign_keys=cliente_id, backref="NotaFiscal")
 
@@ -28,19 +27,19 @@ class NotaFiscal(db.Model):
         return Cliente.query.filter_by(id=int(self.cliente_id)).first().dict()
 
     def get_itens(self):
-        return [item.dict() for item in ItemNotaFiscal.query.filter_by(nota_id=self.id).all()]
+        return [item for item in ItemNotaFiscal.query.filter_by(id=self.id)]
 
     def calcular_nota(self):
-        valor = None
+        valor = 0
         itens = self.get_itens()
         if itens:
             for item in itens:
-                valor += int(item['Valor'])
+                valor += int(item.valorItem)
             return valor
 
     def imprimir_nota_fiscal(self):
         primeira_linha = 111 * '-'
-        espaco_cliente = ("\nNOTA FISCAL {:>99s}" + "\nCliente:{:>5d} {:>8s}: {} " + "\nCPF\\CNPJ: {}\n").format(
+        espaco_cliente = ("\nNOTA FISCAL {:>99s}" + "\nCliente:{:>5s} {:>8s}: {} " + "\nCPF\\CNPJ: {}\n").format(
             self.data, self.cliente.codigo, "Nome", self.cliente.nome,
             self.cliente.cnpjcpf)
 
@@ -57,8 +56,8 @@ class NotaFiscal(db.Model):
             espaco_itens += ("\n00{}" + "{:>20s}" + "{:>47d}" + "{:>14.2f}" + "{:>20.2f}").format(item.sequencial,
                                                                                                   item.descricao,
                                                                                                   item.quantidade,
-                                                                                                  item.valorunit,
-                                                                                                  item.get_valor_item)
+                                                                                                  item.valorUnitario,
+                                                                                                  item.valorItem)
 
         ultima_linha = "\n" + 111 * '_'
         nota_fiscal = (primeira_linha + espaco_cliente + segunda_linha + terceira_linha + espaco_crt + quarta_linha +

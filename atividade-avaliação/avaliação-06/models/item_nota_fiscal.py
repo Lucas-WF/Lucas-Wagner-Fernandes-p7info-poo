@@ -15,16 +15,15 @@ class ItemNotaFiscal(db.Model):
     nota = db.relationship("NotaFiscal", foreign_keys=nota_fiscal_id, backref="ItemNotaFiscal")
 
     def __init__(self, id, sequencial, quantidade, produto_id, nota_fiscal_id):
-        super().__init__(id=id, sequencial=sequencial, quantidade=quantidade, produto_id=produto_id,
-                         nota_fiscal_id=nota_fiscal_id)
+        super().__init__(id=id, sequencial=sequencial, quantidade=quantidade, produto_id=produto_id, nota_fiscal_id=nota_fiscal_id)
         produto = Produto.query.filter_by(id=self.produto_id)
-        self.descricao = produto.descricao
-        self.valorunitario = produto.valorunitario
+        self.descricao = produto[0].descricao
+        self.valorUnitario = produto[0].valorunitario
         self.valorItem = self.quantidade * self.valorUnitario
 
     def __repr__(self):
         return "\nID: %r, Quantidade: %r, Descrição: %r, Valor Unitário: %r, Valor Item: %r\n" % (self.id,
                                                                                                   self.quantidade,
                                                                                                   self.descricao,
-                                                                                                  self.valorunitario,
+                                                                                                  self.valorUnitario,
                                                                                                   self.valor_item)

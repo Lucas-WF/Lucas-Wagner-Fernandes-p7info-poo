@@ -53,7 +53,7 @@ def main():  # Função principal do código
     words_dict = {}
     words_list = []
     while True:
-        op = input("Palavra: ")
+        op = input("Digite a Frase: ")
         if op == "0":  # Condição de saída como definido na questão
             break
         else:

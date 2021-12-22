@@ -11,8 +11,8 @@ class ItemNotaFiscal(db.Model):
     quantidade = db.Column(db.Integer, nullable=False)
     produto_id = db.Column(db.Integer, db.ForeignKey("Produto.id"), nullable=False)
     nota_fiscal_id = db.Column(db.Integer, db.ForeignKey("NotaFiscal.id"), nullable=False)
-    produto = db.relationship("Produto", foreign_keys=produto_id, backref="ItemNotaFiscal")
-    nota = db.relationship("NotaFiscal", foreign_keys=nota_fiscal_id, backref="ItemNotaFiscal")
+    produto = db.relationship("Produto", foreign_keys=produto_id, back_populates="item")
+    nota = db.relationship("NotaFiscal", foreign_keys=nota_fiscal_id, back_populates="itens")
 
     def __init__(self, id, sequencial, quantidade, produto_id, nota_fiscal_id):
         super().__init__(id=id, sequencial=sequencial, quantidade=quantidade, produto_id=produto_id, nota_fiscal_id=nota_fiscal_id)

@@ -11,7 +11,7 @@ class NotaFiscal(db.Model):
     codigo = db.Column(db.Integer, nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey("Cliente.id"), nullable=False)
     data = db.Column(db.String(255), default="2018-11-11")
-    itens = db.relationship("ItemNotaFiscal", backref="NotaFiscal", lazy=True)
+    itens = db.relationship("ItemNotaFiscal", back_populates="nota", lazy=True)
     cliente = db.relationship("Cliente", foreign_keys=cliente_id, backref="NotaFiscal")
 
     def __init__(self, id, codigo, cliente_id, data):

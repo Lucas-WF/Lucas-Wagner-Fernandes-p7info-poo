@@ -9,7 +9,7 @@ class Produto(db.Model):
     codigo = db.Column(db.Integer, nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     valorunitario = db.Column(db.Float, nullable=False)
-    item = db.relationship("ItemNotaFiscal", backref='Produto')
+    item = db.relationship("ItemNotaFiscal", back_populates='produto')
 
     def __init__(self, id, codigo, descricao, valorunitario):
         super().__init__(id=id, codigo=codigo, descricao=descricao, valorunitario=valorunitario)
